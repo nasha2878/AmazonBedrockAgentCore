@@ -1,0 +1,31 @@
+*** Perform system updates ***
+sudo dnf update -y
+sudo dnf install -y python3.12 python3-pip
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
+python3 –version (should be 3.10 or higher)
+
+
+*** Setup a Python virtual environment ***
+python3 -m venv bedrock-env
+source bedrock-env/bin/activate
+
+
+*** Install required Python packages and verify their versions ***
+pip install boto3== 1.40.49 botocore== 1.40.49
+pip show boto3 | grep Version
+
+
+*** Install AWS CLI and configure it ***
+pip install awscli --upgrade
+aws configure (using the MyAgentCoreUser user OR your user)
+
+
+*** Install Bedrock AgentCore Starter Toolkit ***
+curl -LsSf https://astral.sh/uv/install.sh | sh 
+uv pip install bedrock-agentcore-starter-toolkit
+
+pip install bedrock-agentcore-starter-toolkit
+
+
+*** Verify that agentcore is installed ***
+agentcore --help
