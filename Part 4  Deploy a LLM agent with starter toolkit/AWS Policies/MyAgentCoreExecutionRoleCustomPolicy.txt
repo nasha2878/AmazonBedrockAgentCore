@@ -86,7 +86,10 @@
             "Sid": "IAMPassRole",
             "Effect": "Allow",
             "Action": [
-                "iam:PassRole"
+                "iam:PassRole",
+	            "iam:CreateServiceLinkedRole",
+				"iam:GetRole",
+				"iam:ListRoles"
             ],
             "Resource": "*"
         },
@@ -109,4 +112,5 @@
             "Resource": "*"
         }
     ]
+
 }
