@@ -56,7 +56,9 @@
 				"iam:CreateRole",
 				"iam:PassRole",
 				"iam:AttachRolePolicy",
-				"iam:PutRolePolicy"
+				"iam:PutRolePolicy",
+				"iam:CreateServiceLinkedRole",
+				"iam:ListRoles"
 			],
 			"Resource": "*"
 		},
@@ -72,4 +74,5 @@
 			"Resource": "*"
 		}
 	]
+
 }
