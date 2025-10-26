@@ -1,2 +1,0 @@
-boto3>=1.40.49
-bedrock-agentcore==0.1.7
