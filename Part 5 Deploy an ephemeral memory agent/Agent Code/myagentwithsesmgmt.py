@@ -12,18 +12,20 @@ app = BedrockAgentCoreApp()
 # Ephemeral (in-memory) session memory
 SESSION_MEMORY = {}
 
-# Bedrock client for Titan Text Lite
+# Bedrock client for Claude 3 Haiku
 bedrock = boto3.client("bedrock-runtime", region_name="us-east-1")
+
+MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
 
 
 @app.entrypoint
 def invoke(payload):
     """
-    Ephemeral conversational agent with Titan Text Lite.
-    Session memory lasts only within runtime or session (e.g., 30 min – 30 days max).
+    Ephemeral conversational agent using Claude 3 Haiku via Bedrock.
+    Session memory lasts only within the current runtime.
     """
 
-    # Parse payload
+    # Parse payload safely
     if isinstance(payload, (bytes, str)):
         try:
             payload = json.loads(payload)
@@ -31,45 +33,51 @@ def invoke(payload):
             payload = {}
 
     prompt = payload.get("prompt") or payload.get("input") or ""
-    runtimeSessionId = payload.get("runtimeSessionId", "default-session")  # Corrected
+    runtimeSessionId = payload.get("runtimeSessionId", "default-session")
 
     if not prompt:
         return {"message": "No prompt provided."}
 
     logger.info(f"Session: {runtimeSessionId}, Prompt: {prompt}")
 
-    # Retrieve history for this session
+    # Retrieve short-term conversation history
     history = SESSION_MEMORY.get(runtimeSessionId, [])
 
-    # Construct conversation prompt
-    conversation = "\n".join([f"{m['role']}: {m['text']}" for m in history])
-    full_prompt = f"{conversation}\nuser: {prompt}\nassistant:"
+    # Format conversation as chat messages for Claude
+    messages = []
+    for m in history:
+        role = "user" if m["role"] == "user" else "assistant"
+        messages.append({"role": role, "content": [{"type": "text", "text": m["text"]}]})
 
-    # Invoke LLM (Amazon Titan Text Lite)
+    # Append new user input
+    messages.append({"role": "user", "content": [{"type": "text", "text": prompt}]})
+
+    # Construct the Claude request payload
+    body = {
+        "anthropic_version": "bedrock-2023-05-31",
+        "max_tokens": 512,
+        "temperature": 0.7,
+        "messages": messages
+    }
+
+    # Call Claude 3 Haiku
     try:
         response = bedrock.invoke_model(
-            modelId="amazon.titan-text-lite-v1",
+            modelId=MODEL_ID,
             contentType="application/json",
             accept="application/json",
-            body=json.dumps({
-                "inputText": full_prompt,
-                "textGenerationConfig": {
-                    "maxTokenCount": 256,
-                    "temperature": 0.7,
-                    "topP": 0.9
-                }
-            })
+            body=json.dumps(body)
         )
         response_body = json.loads(response["body"].read())
-        reply = response_body.get("results", [{}])[0].get("outputText", "")
+        reply = response_body.get("content", [{}])[0].get("text", "")
     except Exception as e:
-        logger.exception("Error calling Titan Text Lite:")
+        logger.exception("Error calling Claude 3 Haiku:")
         reply = f"Error: {str(e)}"
 
-    # Update ephemeral session memory
+    # Update ephemeral session memory (limit to last 10 turns)
     history.append({"role": "user", "text": prompt})
     history.append({"role": "assistant", "text": reply})
-    SESSION_MEMORY[runtimeSessionId] = history[-10:]  # Keep only the last 10 exchanges to limit token usage
+    SESSION_MEMORY[runtimeSessionId] = history[-10:]  # keep last 10 exchanges only
 
     return {"message": reply}
 
