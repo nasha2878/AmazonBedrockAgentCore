@@ -19,7 +19,7 @@ MODEL_ID = "anthropic.claude-3-sonnet-20240229-v1:0"
 MEMORY_ID = "memory_76xv1-pn5F0eAgFq"   # <-- YOUR MEMORY ID
 SESSION_ID = "default_session"
 
-S3_BUCKET = "mysmslabbucket" # <-- YOUR SE BUCKET NAME
+S3_BUCKET = "mysmslabbucket" # <-- YOUR S3 BUCKET NAME
 SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:258652252690:mysmslabtopic" # <-- YOUR SNS TOPIC ARN
 
 # --- Lazy client getters ---
@@ -189,3 +189,4 @@ def invoke(payload):
 
 if __name__ == "__main__":
     app.run()
+
