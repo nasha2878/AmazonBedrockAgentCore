@@ -1,0 +1,13 @@
+*** OS packages ***
+sudo apt update
+sudo apt install -y python3-venv unzip jq
+
+
+*** Python virtual environment ***
+python3 -m venv agentcore-lab
+source agentcore-lab/bin/activate
+
+
+*** Python packages ***
+pip install --upgrade pip
+pip install boto3 requests
