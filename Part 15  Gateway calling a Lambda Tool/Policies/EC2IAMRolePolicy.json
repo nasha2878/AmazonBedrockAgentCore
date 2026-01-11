@@ -4,7 +4,8 @@
     {
       "Effect": "Allow",
       "Action": "bedrock-agentcore:InvokeGateway",
-      "Resource": "arn:aws:bedrock-agentcore:us-east-1:<ACCOUNT_ID>:gateway/gatewayOAuth" /* REPLACE WITH YOUR GATEWAY ID */
+      "Resource": "arn:aws:bedrock-agentcore:us-east-1:<ACCOUNT_ID>:gateway/<gatewayOAuth>" /* REPLACE WITH YOUR GATEWAY ARN */
     }
   ]
 }
+
