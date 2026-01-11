@@ -1,7 +1,7 @@
 import requests
 import base64
 
-TOKEN_URL = "https://<domain>.auth.us-east-1.amazoncognito.com/oauth2/token" # REPLACE WITH YOUR COGNITO DOMAIN NAME
+TOKEN_URL = "https://<domain>/oauth2/token" # REPLACE WITH YOUR COGNITO DOMAIN NAME
 CLIENT_ID = "<client-id>" # REPLACE WITH YOU CLIENT ID
 CLIENT_SECRET = "<client-secret>" # REPLACE WITH YOU CLIENT SECRET
 
@@ -22,5 +22,6 @@ r.raise_for_status()
 
 token = r.json()["access_token"]
 print("Access Token:\n", token)
+
 
 
