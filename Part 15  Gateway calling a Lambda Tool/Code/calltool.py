@@ -1,6 +1,6 @@
 import requests
 
-GATEWAY_URL = "https://<gateway-id>.gateway.bedrock-agentcore.us-east-1.amazonaws.com/mcp" # REPLACE WITH YOUR GATEWAY ID
+GATEWAY_URL = "https://gateway-id.gateway.bedrock-agentcore.us-east-1.amazonaws.com/mcp" # REPLACE WITH YOUR GATEWAY URL
 TOKEN = "<PASTE TOKEN>" #REPLACE WITH OAUTH TOKEN
 
 payload = {
@@ -22,3 +22,4 @@ headers = {
 
 r = requests.post(GATEWAY_URL, headers=headers, json=payload)
 print(r.json())
+
