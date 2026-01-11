@@ -14,7 +14,7 @@ headers = {
 
 data = {
     "grant_type": "client_credentials",
-    "scope": "<gatewayOAuth/genesis-gateway:invoke?" # REPLACE WITH YOUR CUSTOM SCOPE
+    "scope": "<custom scope>" # REPLACE WITH YOUR CUSTOM SCOPE
 }
 
 r = requests.post(TOKEN_URL, headers=headers, data=data)
@@ -22,6 +22,7 @@ r.raise_for_status()
 
 token = r.json()["access_token"]
 print("Access Token:\n", token)
+
 
 
 
