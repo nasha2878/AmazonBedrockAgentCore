@@ -1,4 +1,4 @@
-*** OS packages ***
+*** OS PACKAGES ***
 sudo apt update
 sudo apt install -y python3-venv unzip jq
 
@@ -9,10 +9,11 @@ unzip awscliv2.zip
 sudo ./aws/install 
 aws --version (should be 2.32.32)
 
-*** Python virtual environment ***
+*** PYTHON VIRTUAL ENVIRONMENT ***
 python3 -m venv agentcore-lab
 source agentcore-lab/bin/activate
 
-*** Python packages ***
+*** PYTHON PACKAGES ***
 pip install --upgrade pip
 pip install boto3 requests
+
