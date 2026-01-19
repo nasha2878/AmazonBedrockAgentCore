@@ -1,0 +1,29 @@
+*** Create Project Directory ***
+mkdir -p ~/agentcore-weather-agent
+cd ~/agentcore-weather-agent
+
+*** Agent deploy commands ***
+chmod +x deploy.sh
+./deploy.sh
+
+
+
+
+
+
+*** ECR repository  ***
+aws ecr create-repository --repository-name weather-agent --region us-east-1
+
+*** Build & push using Docker Buildx (ARM64) ***
+docker buildx build \
+  --platform linux/arm64 \
+  -t <<youraccountID>>.dkr.ecr.us-east-1.amazonaws.com/weather-agent:latest \
+  --push \
+  .
+
+*** Verify the image is in ECR ***
+aws ecr describe-images \
+  --repository-name weather-agent \
+  --region us-east-1
+
+
