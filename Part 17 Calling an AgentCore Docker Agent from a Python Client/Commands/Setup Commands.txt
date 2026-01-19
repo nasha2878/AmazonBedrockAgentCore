@@ -10,7 +10,7 @@ sudo apt install -y \
   python3-venv \
   ca-certificates
 
-*** Install AWS CLI v2 (ARM64)  ***
+*** Install AWS CLI v2 (ARM64 or x86)  ***
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
                               
                               OR
@@ -19,7 +19,7 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o awscliv2.zip
 
 unzip awscliv2.zip
 sudo ./aws/install
-aws --version
+aws --version                          (should be 2.32 or above)
 
 
 *** python environment ***
@@ -35,5 +35,6 @@ s = boto3.session.Session()
 print("bedrock-agentcore-control" in s.get_available_services())
 print("bedrock-agentcore" in s.get_available_services())
 EOF
+
 
 
