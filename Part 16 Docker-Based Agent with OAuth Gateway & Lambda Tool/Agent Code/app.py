@@ -18,8 +18,8 @@ def call_gateway_tool(tool_name, parameters):
     """Call AgentCore Gateway to invoke Lambda tools with OAuth token"""
     
     try:
-        print(f"ðŸ”§ Calling gateway tool: {tool_name}")
-        print(f"ðŸ“‹ Parameters: {json.dumps(parameters, indent=2)}")
+        print(f"Calling gateway tool: {tool_name}")
+        print(f"Parameters: {json.dumps(parameters, indent=2)}")
         
         # Prepare the MCP request payload matching your schema
         payload = {
@@ -39,9 +39,9 @@ def call_gateway_tool(tool_name, parameters):
             'Authorization': f'Bearer {OAUTH_TOKEN}'
         }
         
-        print(f"ðŸŒ Making request to gateway: {GATEWAY_URL}")
-        print(f"ðŸ” Using OAuth token: {OAUTH_TOKEN[:20]}..." if OAUTH_TOKEN else "âŒ No OAuth token")
-        print(f"ðŸ“¤ Request payload: {json.dumps(payload, indent=2)}")
+        print(f"Making request to gateway: {GATEWAY_URL}")
+        print(f"Using OAuth token: {OAUTH_TOKEN[:20]}..." if OAUTH_TOKEN else "âŒ No OAuth token")
+        print(f"Request payload: {json.dumps(payload, indent=2)}")
         
         # Make the request to gateway
         response = requests.post(
@@ -51,32 +51,32 @@ def call_gateway_tool(tool_name, parameters):
             timeout=30
         )
         
-        print(f"ðŸ“¡ Gateway response status: {response.status_code}")
+        print(f"Gateway response status: {response.status_code}")
         
         if response.status_code == 200:
             # Add JSON error handling for gateway response
             try:
                 result = response.json()
-                print(f"âœ… Gateway response: {json.dumps(result, indent=2)}")
+                print(f"Gateway response: {json.dumps(result, indent=2)}")
                 return result
             except json.JSONDecodeError:
                 # If it's not JSON, return the raw text
                 raw_text = response.text
-                print(f"âš ï¸ Non-JSON response: {raw_text}")
+                print(f"Non-JSON response: {raw_text}")
                 return {"result": {"content": raw_text}}
         else:
             error_text = response.text
-            print(f"âŒ Gateway error response: {error_text}")
+            print(f"Gateway error response: {error_text}")
             return {"error": f"Gateway call failed: {response.status_code} - {error_text}"}
             
     except Exception as e:
-        print(f"âŒ Exception calling gateway: {str(e)}")
+        print(f"Exception calling gateway: {str(e)}")
         return {"error": f"Exception calling gateway: {str(e)}"}
 
 def get_weather(city):
     """Get weather for a city by calling the gateway with correct tool name"""
     
-    print(f"ðŸŒ¤ï¸ Getting weather for '{city}' via gateway...")
+    print(f"Getting weather for '{city}' via gateway...")
     
     # Prepare parameters matching your schema: {"city": "string"}
     parameters = {"city": city}
@@ -110,9 +110,9 @@ def invocations():
     
     try:
         # Add debugging to see what we're actually receiving
-        print(f"ðŸ“¥ Raw request data: {request.data}")
-        print(f"ðŸ“¥ Request content type: {request.content_type}")
-        print(f"ðŸ“¥ Request headers: {dict(request.headers)}")
+        print(f"Raw request data: {request.data}")
+        print(f"Request content type: {request.content_type}")
+        print(f"Request headers: {dict(request.headers)}")
         
         # FIX: Handle any content type - force JSON parsing
         try:
@@ -122,31 +122,31 @@ def invocations():
             else:
                 data = None
         except Exception as json_error:
-            print(f"âŒ JSON parsing error: {json_error}")
+            print(f"JSON parsing error: {json_error}")
             return jsonify({
                 "completion": f"Error parsing request JSON: {json_error}. Raw data: {request.data.decode('utf-8', errors='ignore')}",
                 "stop_reason": "end_turn"
             }), 200
         
         if data is None:
-            print("âŒ No data received")
+            print("No data received")
             return jsonify({
                 "completion": "Error: No data received in request",
                 "stop_reason": "end_turn"
             }), 200
             
-        print(f"ðŸ“¥ Parsed request: {json.dumps(data, indent=2)}")
+        print(f"Parsed request: {json.dumps(data, indent=2)}")
         
         # Extract the user message
         if 'input' in data and 'text' in data['input']:
             user_message = data['input']['text']
-            print(f"ðŸ‘¤ User message: {user_message}")
+            print(f"User message: {user_message}")
             
             # Simple intent detection for weather queries
             if any(word in user_message.lower() for word in ['weather', 'temperature', 'forecast', 'climate']):
                 # Extract city from message
                 city = extract_city_from_message(user_message)
-                print(f"ðŸ™ï¸ Detected city: {city}")
+                print(f"Detected city: {city}")
                 
                 # Call gateway to get weather using correct tool name
                 weather_response = get_weather(city)
@@ -169,13 +169,13 @@ def invocations():
                 "stop_reason": "end_turn"
             }
         
-        print(f"ðŸ“¤ Sending response: {json.dumps(response, indent=2)}")
+        print(f"Sending response: {json.dumps(response, indent=2)}")
         return jsonify(response), 200
         
     except Exception as e:
-        print(f"âŒ Error processing request: {str(e)}")
-        print(f"âŒ Request data: {request.data}")
-        print(f"âŒ Request content type: {request.content_type}")
+        print(f"Error processing request: {str(e)}")
+        print(f"Request data: {request.data}")
+        print(f"Request content type: {request.content_type}")
         
         error_response = {
             "completion": f"Sorry, I encountered an error: {str(e)}",
@@ -245,7 +245,7 @@ def test_tool():
     """Test endpoint to verify tool calling works"""
     
     test_city = "London"
-    print(f"ðŸ§ª Testing weather tool with city: {test_city}")
+    print(f"Testing weather tool with city: {test_city}")
     
     try:
         result = get_weather(test_city)
@@ -272,15 +272,16 @@ if __name__ == '__main__':
     
     # Validate configuration
     if not GATEWAY_URL or GATEWAY_URL == 'YOUR_GATEWAY_URL_HERE':
-        print("âš ï¸  WARNING: GATEWAY_URL not configured!")
+        print("WARNING: GATEWAY_URL not configured!")
     
     if not OAUTH_TOKEN or OAUTH_TOKEN == 'YOUR_OAUTH_TOKEN_HERE':
-        print("âš ï¸  WARNING: OAUTH_TOKEN not configured!")
+        print("WARNING: OAUTH_TOKEN not configured!")
     
-    print("\nðŸ”§ Available endpoints:")
+    print("\n Available endpoints:")
     print("  POST /invocations - Main agent endpoint")
     print("  GET  /ping       - Health check")
     print("  GET  /health     - Detailed health check")
     print("  GET  /test       - Test weather tool")
     
+
     app.run(host='0.0.0.0', port=8080, debug=True)
