@@ -1,0 +1,7 @@
+*** Create Project Directory ***
+mkdir -p ~/agentcore-weather-agent
+cd ~/agentcore-weather-agent
+
+*** Agent deploy commands ***
+chmod +x deploy.sh
+./deploy.sh

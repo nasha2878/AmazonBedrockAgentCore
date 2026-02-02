@@ -1,0 +1,26 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "VisualEditor0",
+			"Effect": "Allow",
+			"Action": "bedrock-agentcore:*",
+			"Resource": "<< GATEWAY ARN >>"
+		},
+		{
+			"Sid": "VisualEditor1",
+			"Effect": "Allow",
+			"Action": "s3:*",
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"bedrock-agentcore:InvokeAgentRuntime",
+				"bedrock-agentcore:InvokeAgentRuntime",
+				"bedrock-agentcore:GetAgentRuntime"
+			],
+			"Resource": "*"
+		}
+	]
+}

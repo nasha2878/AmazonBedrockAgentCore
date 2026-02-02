@@ -1,0 +1,15 @@
+[
+  {
+    "name": "myWeatherTool",
+    "description": "My weather tool",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        }
+      },
+      "required": ["city"]
+    }
+  }
+]
