@@ -1,0 +1,12 @@
+Real-Time Dynamic Weather Agent with AgentCore, Docker, LLM, OAuth, and OpenWeather API
+
+You are tasked with building an intelligent, real-time weather assistant that can interact with users using natural language. The assistant must determine whether a user’s message requires weather information or is a general question, and respond appropriately. The agent is built using Amazon Bedrock AgentCore and leverages a large language model (LLM) to reason over user input and decide when a tool invocation is required. The solution integrates the following components:
+
+AgentCore LLM – Interprets user queries and dynamically decides whether to invoke a weather tool or respond directly using the model.
+Dynamic Gateway Tool Discovery – The agent discovers available tools at runtime from the AgentCore Gateway, removing the need for hardcoded tool names.
+OpenWeather API Lambda Integration – The weather tool invokes an AWS Lambda function that retrieves real-time weather data from the OpenWeather API (free tier).
+Secure Secrets Management – API keys and OAuth credentials are securely stored in AWS Secrets Manager and retrieved dynamically at runtime.
+OAuth-Based Authorization – The agent dynamically fetches OAuth access tokens using client credentials to securely authenticate with the AgentCore Gateway.
+Dockerized Runtime – The agent is containerized using Docker, enabling consistent local development and cloud deployment.
+
+By the end of this lab, you will have built a production-style intelligent agent that can reason, authenticate securely, discover tools dynamically, and provide real-time weather insights through natural conversation.
