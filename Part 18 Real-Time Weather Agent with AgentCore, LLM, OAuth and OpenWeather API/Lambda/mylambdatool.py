@@ -9,7 +9,7 @@ logger.setLevel(logging.INFO)
 
 # Secret name in Secrets Manager
 SECRET_NAME = "myOpenWeatherAPIKey" #REPLACE WITH YOUR WEATHER API SECRET NAME
-REGION = os.environ.get("AWS_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1") #REPLACE WITH YOUR REGION
 
 # Secrets Manager client
 secrets_client = boto3.client("secretsmanager", region_name=REGION)
@@ -69,4 +69,5 @@ def lambda_handler(event, context):
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
         return {"error": f"Unexpected error: {e}"}
+
 
