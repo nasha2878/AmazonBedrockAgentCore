@@ -51,4 +51,22 @@ aws --version
 echo "=== Cleanup AWS CLI installer ==="
 rm -rf awscliv2.zip aws
 
+# ===============================
+# Create virtual environment
+# ===============================
+echo "=== Creating Python virtual environment: agentcore-env ==="
+python3 -m venv ~/agentcore-env
+
+echo "=== Activating virtual environment ==="
+source ~/agentcore-env/bin/activate
+
+echo "=== Upgrading pip in venv ==="
+pip install --upgrade pip
+
+echo "=== Installing required Python packages ==="
+pip install requests
+
+echo "=== Virtual environment setup complete ==="
+echo "To activate, run: source ~/agentcore-env/bin/activate"
+
 echo "=== Setup Complete ==="
