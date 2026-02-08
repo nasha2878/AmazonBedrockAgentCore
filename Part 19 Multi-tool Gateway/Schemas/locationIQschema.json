@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  title: LocationIQ Forward Geocoding
+  description: REST API target for resolving location names to coordinates using LocationIQ.
+  version: 1.0.0
+servers:
+  - url: https://us1.locationiq.com/v1
+paths:
+  /search.php:
+    get:
+      operationId: forwardGeocode
+      summary: Forward Geocoding
+      description: Returns latitude and longitude for a given location name.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Location query (city, address, etc.)
+        - in: query
+          name: format
+          schema:
+            type: string
+            default: json
+          required: true
+          description: Response format (must be json)
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    lat:
+                      type: string
+                      description: Latitude
+                    lon:
+                      type: string
+                      description: Longitude
+                    display_name:
+                      type: string
+                      description: Full address

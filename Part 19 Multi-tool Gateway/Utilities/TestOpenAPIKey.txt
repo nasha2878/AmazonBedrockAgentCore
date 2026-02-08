@@ -1,0 +1,7 @@
+Perform API Key test :
+Call this URL : https://api.openweathermap.org/data/2.5/weather?q=New%20York&units=imperial&appid=<<YOUR_API_KEY>>
+
+If it returns a JSON response → you’re good
+
+Note : New keys can take 5–15 minutes to become active. If you see 401 Unauthorized then wait and retry
+

@@ -1,0 +1,26 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CloudWatchLogsAccess",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogGroups"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AgentCoreGatewayAccess",
+            "Effect": "Allow",
+            "Action": [
+                "bedrock-agentcore:InvokeGateway",
+                "bedrock-agentcore:GetGateway",
+                "bedrock-agentcore:ListGateways"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
