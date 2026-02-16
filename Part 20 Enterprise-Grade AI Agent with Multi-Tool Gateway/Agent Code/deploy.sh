@@ -4,11 +4,11 @@
 set -e
 
 # Configuration
-ACCOUNT_ID="258652252690" # REPLACE WITH YOUR ACCOUNT ID
+ACCOUNT_ID="<<ACCOUNT ID>>" # REPLACE WITH YOUR ACCOUNT ID
 REGION="us-east-1" # REPLACE WITH YOUR REGION
-REPO_NAME="sfoagent" # REPLACE WITH YOUR DESIRED REPO NAME
+REPO_NAME="sfoagent"
 
-echo " Deploying Weather Agent Container (No Local Test)"
+echo " Deploying Agent Container (No Local Test)"
 echo "================================================="
 
 # Cleanup any existing containers
