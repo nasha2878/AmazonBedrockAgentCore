@@ -1,7 +1,7 @@
 import boto3
 import json
 
-AGENT_RUNTIME_ARN = "arn:aws:bedrock-agentcore:us-east-1:258652252690:runtime/IFOagent-icQa6u2Lpo"  # REPLACE WITH AGENT'S ARN
+AGENT_RUNTIME_ARN = "<<AGENT ARN>>"  # REPLACE WITH AGENT'S ARN
 REGION = "us-east-1" #REPLACE WITH YOUR REGION
 
 client = boto3.client("bedrock-agentcore", region_name=REGION)
@@ -51,3 +51,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
