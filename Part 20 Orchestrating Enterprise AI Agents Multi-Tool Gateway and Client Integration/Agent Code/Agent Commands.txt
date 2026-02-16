@@ -1,0 +1,7 @@
+*** Create Project Directory ***
+mkdir -p ~/sfoagent
+cd ~/sfoagent
+
+*** Agent deploy commands ***
+chmod +x deploy.sh
+./deploy.sh
