@@ -13,14 +13,6 @@
 			"Action": "s3:*",
 			"Resource": "*"
 		}
-		// {
-		// 	"Effect": "Allow",
-		// 	"Action": [
-		// 		"bedrock-agentcore:InvokeAgentRuntime",
-		// 		"bedrock-agentcore:InvokeAgentRuntime",
-		// 		"bedrock-agentcore:GetAgentRuntime"
-		// 	],
-		// 	"Resource": "*"
-		// }
 	]
+
 }
