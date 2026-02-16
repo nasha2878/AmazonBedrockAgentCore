@@ -1,0 +1,41 @@
+Context:
+
+In Part 19, we  built and deployed:
+A multi-tool AgentCore Gateway
+
+Today we will focus purely on consumption – 
+Learn how an agent calls the gateway dynamically to make a tool call 
+Create an external client that calls that agent
+
+Python Client (EC2)
+   |
+   | IAM Role 
+   v
+AgentCore Agent (Docker Runtime with LLM)
+   |
+   | OAuth Token (managed by Agent)
+   v
+Multi-tool AgentCore Gateway 
+   |
+   | IAM Role / API Key (depending on the tool)
+   v
+Tool Call
+
+
+Scenario:
+
+Build a Smart Field Operations Agent with Client Integration
+
+Imagine a Field Operations Manager using a client app to interact with your agent:
+
+Ask the agent in plain language for weather updates at any location.
+Automatically resolve locations via LocationIQ.
+Push summary alerts to Slack so the team is instantly informed.
+
+The client serves as the interface, sending natural language requests to the agent, which orchestrates multiple tools behind the scenes turning multi-step operational tasks into a single seamless workflow
+
+Your agent should be able to respond to user prompts that require multiple tools to respond and take action :
+
+Get the coordinates for Berlin and send them to #social
+What is the current weather in Tokyo? Send it to #mylab
+Get the coordinates for Madrid, then get the weather for those coordinates, then send a short summary to #social 
