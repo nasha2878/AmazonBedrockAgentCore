@@ -1,0 +1,7 @@
+*** Create Project Directory ***
+mkdir -p ~/gdaagent
+cd ~/gdaagent
+
+*** Agent deploy commands ***
+chmod +x deploy.sh
+./deploy.sh

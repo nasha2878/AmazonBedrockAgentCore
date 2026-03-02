@@ -1,0 +1,18 @@
+[
+  {
+    "name": "myGoogleDriveTool",
+    "description": "Fetch Alphabet Q4 earnings PDF from Google Drive",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "file_name": {
+          "type": "string",
+          "description": "Name of the PDF file to fetch from Google Drive"
+        }
+      },
+      "required": [
+        "file_name"
+      ]
+    }
+  }
+]

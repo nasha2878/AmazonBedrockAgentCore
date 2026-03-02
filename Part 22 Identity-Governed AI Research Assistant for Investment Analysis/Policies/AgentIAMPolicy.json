@@ -1,0 +1,138 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "ECRImageAccess",
+			"Effect": "Allow",
+			"Action": [
+				"ecr:GetAuthorizationToken",
+				"ecr:BatchCheckLayerAvailability",
+				"ecr:GetDownloadUrlForLayer",
+				"ecr:BatchGetImage"
+			],
+			"Resource": "<<ECR REPO ARN>>"
+		},
+		{
+			"Sid": "ECRTokenAccess",
+			"Effect": "Allow",
+			"Action": [
+				"ecr:GetAuthorizationToken"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "CloudWatchLogs",
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogGroup",
+				"logs:CreateLogStream",
+				"logs:PutLogEvents"
+			],
+			"Resource": "arn:aws:logs:us-east-1:<<ACCOUNT_ID>>:log-group:/aws/bedrock-agentcore/runtimes/*"
+		},
+		{
+			"Sid": "DescribeLogGroups",
+			"Effect": "Allow",
+			"Action": [
+				"logs:DescribeLogGroups"
+			],
+			"Resource": "arn:aws:logs:us-east-1:<<ACCOUNT_ID>>:log-group:*"
+		},
+		{
+			"Sid": "CloudWatchLogStreams",
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogStream",
+				"logs:PutLogEvents"
+			],
+			"Resource": "arn:aws:logs:us-east-1:<<ACCOUNT_ID>>:log-group:/aws/bedrock-agentcore/runtimes/*:log-stream:*"
+		},
+		{
+			"Sid": "XRayTelemetry",
+			"Effect": "Allow",
+			"Action": [
+				"xray:PutTraceSegments",
+				"xray:PutTelemetryRecords",
+				"xray:GetSamplingRules",
+				"xray:GetSamplingTargets"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "CloudWatchMetrics",
+			"Effect": "Allow",
+			"Action": [
+				"cloudwatch:PutMetricData"
+			],
+			"Resource": "*",
+			"Condition": {
+				"StringEquals": {
+					"cloudwatch:namespace": "bedrock-agentcore"
+				}
+			}
+		},
+		{
+			"Sid": "WorkloadIdentityAccess",
+			"Effect": "Allow",
+			"Action": [
+				"bedrock-agentcore:GetWorkloadIdentity",
+				"bedrock-agentcore:GetWorkloadAccessToken",
+				"bedrock-agentcore:GetWorkloadAccessTokenForJWT",
+				"bedrock-agentcore:GetWorkloadAccessTokenForUserId"
+			],
+			"Resource": [
+				"arn:aws:bedrock-agentcore:us-east-1:<<ACCOUNT_ID>>:workload-identity-directory/default",
+				"arn:aws:bedrock-agentcore:us-east-1:<<ACCOUNT_ID>>:workload-identity-directory/default/workload-identity/*"
+			]
+		},
+		{
+			"Sid": "OAuthClientAccess",
+			"Effect": "Allow",
+			"Action": [
+				"bedrock-agentcore:GetOauth2CredentialProvider"
+			],
+			"Resource": [
+				"arn:aws:bedrock-agentcore:us-east-1:<<ACCOUNT_ID>>:token-vault/default",
+				"<<IDENTITY OAUTH CLIENT ARN>>"
+			]
+		},
+		{
+			"Sid": "BedrockModelInvocation",
+			"Effect": "Allow",
+			"Action": [
+				"bedrock:InvokeModel",
+				"bedrock:InvokeModelWithResponseStream"
+			],
+			"Resource": [
+				"arn:aws:bedrock:*::foundation-model/*",
+				"arn:aws:bedrock:us-east-1:<<ACCOUNT_ID>>:*"
+			]
+		},
+		{
+			"Sid": "GatewayInvocation",
+			"Effect": "Allow",
+			"Action": [
+				"bedrock-agentcore:InvokeGateway"
+			],
+			"Resource": "arn:aws:bedrock-agentcore:*:*:gateway/*"
+		},
+		{
+			"Sid": "GatewayMetadata",
+			"Effect": "Allow",
+			"Action": [
+				"bedrock-agentcore:GetGateway",
+				"bedrock-agentcore:ListGateways"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "GoogleOAuthTokenStorage",
+			"Effect": "Allow",
+			"Action": [
+				"secretsmanager:GetSecretValue",
+				"secretsmanager:PutSecretValue"
+			],
+			"Resource": "*"
+		}
+	]
+}

@@ -1,0 +1,27 @@
+ {
+    "input": {
+      "text": "Hello"
+    }
+  }
+
+{
+    "input": {
+      "text": "read Alphabet_Inc_Q4_2025_Earnings.pdf"
+    }
+  }
+
+
+{
+    "input": {
+      "text": "summarize in 40 words Meta-Reports-Fourth-Quarter-and-Full-Year-2025-Results-2026.pdf"
+    }
+  }
+
+
+Other sample inputs:
+From Alphabet_Q4_Earnings.pdf, extract revenue, operating income, EPS, and forward guidance.
+Retrieve Alphabet_Q4_Earnings.pdf, extract key financial forecasts, identify AI infrastructure investments, and generate a board-ready summary.
+Analyze Alphabet_Inc_Q4_2025_Earnings.pdf for revenue performance, CapEx trends, and AI investment signals.
+From Q4_Alphabet_Investor_Release.pdf, extract forward guidance and produce an executive briefing for the investment committee.
+
+Note : Provide the name of any financial report as .pdf in the prompt.

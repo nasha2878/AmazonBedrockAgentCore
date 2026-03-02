@@ -1,0 +1,64 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "BedrockAgentCoreAccess",
+			"Effect": "Allow",
+			"Action": [
+				"bedrock:InvokeModel"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "SecretsManagerAccess",
+			"Effect": "Allow",
+			"Action": [
+				"secretsmanager:GetSecretValue",
+				"secretsmanager:PutSecretValue"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "ECRFullPushPull",
+			"Effect": "Allow",
+			"Action": [
+				"ecr:GetAuthorizationToken",
+				"ecr:BatchCheckLayerAvailability",
+				"ecr:BatchGetImage",
+				"ecr:CompleteLayerUpload",
+				"ecr:CreateRepository",
+				"ecr:DescribeImages",
+				"ecr:DescribeRepositories",
+				"ecr:GetDownloadUrlForLayer",
+				"ecr:InitiateLayerUpload",
+				"ecr:ListImages",
+				"ecr:PutImage",
+				"ecr:UploadLayerPart"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "ECRBearerToken",
+			"Effect": "Allow",
+			"Action": [
+				"sts:GetServiceBearerToken"
+			],
+			"Resource": "*",
+			"Condition": {
+				"StringEquals": {
+					"sts:AWSServiceName": "ecr.amazonaws.com"
+				}
+			}
+		},
+		{
+			"Sid": "CloudWatchLogs",
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogGroup",
+				"logs:CreateLogStream",
+				"logs:PutLogEvents"
+			],
+			"Resource": "*"
+		}
+	]
+}
