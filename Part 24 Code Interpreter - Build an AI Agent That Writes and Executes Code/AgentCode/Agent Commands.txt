@@ -1,0 +1,7 @@
+*** Create Project Directory ***
+mkdir -p ~/ciagent
+cd ~/ciagent
+
+*** Agent deploy commands ***
+chmod +x deploy.sh
+./deploy.sh

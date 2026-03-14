@@ -1,0 +1,26 @@
+ {
+    "input": {
+      "text": "Hello"
+    }
+  }
+
+{
+    "input": {
+      "text": "Generate the first 10 Fibonacci numbers"
+    }
+  }
+
+
+{
+    "input": {
+      "text": "Calculate the mean, median, and standard deviation of the numbers: 12, 18, 25, 31, 44, 59, 63, 72."
+    }
+  }
+
+
+Other sample inputs:
+Find all prime numbers between 1 and 200.
+What are the first 100 numbers in the Fibonacci sequence?
+Using the datetime library, calculate exactly how many hours are left until New Year's Day 2027 from right now.
+Create a list of the first 10 Fibonacci numbers, calculate their mean, and tell me which ones are even.
+Simulate 100 coin flips and show me a text-based distribution of the results. Also, generate a small ASCII bar chart showing the ratio of heads to tails.
