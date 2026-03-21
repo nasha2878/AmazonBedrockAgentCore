@@ -1,0 +1,3 @@
+boto3>=1.34.131
+flask>=3.0.0
+bedrock-agentcore
