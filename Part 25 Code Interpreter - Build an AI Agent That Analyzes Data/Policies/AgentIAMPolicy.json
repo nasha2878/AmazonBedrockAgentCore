@@ -1,0 +1,71 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ECRImageAccess",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage"
+            ],
+            "Resource": "<<ECR REPO ARN>>"
+        },
+        {
+            "Sid": "S3BucketAccess",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::YOUR_BUCKET_NAME",
+                "arn:aws:s3:::YOUR_BUCKET_NAME/*"
+            ]
+        },
+        {
+            "Sid": "InvokeGlobalInferenceProfile",
+            "Effect": "Allow",
+            "Action": [
+                "bedrock:InvokeModelWithResponseStream",
+                "bedrock:InvokeModel"
+            ],
+            "Resource": "arn:aws:bedrock:*:<<ACCOUNT_ID>>:inference-profile/global.anthropic.claude-sonnet-4-5-20250929-v1:0"
+        },
+        {
+            "Sid": "AllowCRISDestinationRouting",
+            "Effect": "Allow",
+            "Action": [
+                "bedrock:InvokeModel"
+            ],
+            "Resource": "arn:aws:bedrock:::foundation-model/anthropic.claude-sonnet-4-5-20250929-v1:0",
+            "Condition": {
+                "StringEquals": {
+                    "aws:RequestedRegion": "unspecified"
+                }
+            }
+        },
+        {
+            "Sid": "AgentCoreCodeInterpreter",
+            "Effect": "Allow",
+            "Action": [
+                "bedrock-agentcore:StartCodeInterpreterSession",
+                "bedrock-agentcore:StopCodeInterpreterSession",
+                "bedrock-agentcore:InvokeCodeInterpreter"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CloudWatchLogging",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:DescribeLogGroups",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:<<ACCOUNT_ID>>:log-group:/aws/bedrock-agentcore/*"
+        }
+    ]
+}
