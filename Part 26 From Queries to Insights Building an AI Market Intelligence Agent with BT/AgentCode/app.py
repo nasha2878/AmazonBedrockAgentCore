@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 # 3. AWS Clients
 AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
-MODEL_ID = os.environ.get("MODEL_ID", "anthropic.claude-3-5-sonnet-20240620-v1:0")
+MODEL_ID = os.environ.get("MODEL_ID", "anthropic.claude-3-5-sonnet-20240620-v1:0") #global.anthropic.claude-sonnet-4-5-20250929-v1:0
 
 agentcore = boto3.client("bedrock-agentcore", region_name=AWS_REGION)
 bedrock_runtime = boto3.client("bedrock-runtime", region_name=AWS_REGION)
