@@ -8,7 +8,7 @@ ACCOUNT_ID="<<ACCOUNTID>>" # REPLACE WITH YOUR ACCOUNT ID
 REGION="us-east-1" # REPLACE WITH YOUR REGION
 REPO_NAME="btagent"
 
-echo " Deploying Weather Agent Container (No Local Test)"
+echo " Deploying Agent Container (No Local Test)"
 echo "================================================="
 
 # Cleanup any existing containers
@@ -52,6 +52,4 @@ docker push ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO_NAME}:latest
 echo "Container pushed to ECR!"
 echo ""
 echo "🔧 Next step: Configure your AgentCore Runtime with:"
-echo "   Gateway URL: [Your actual gateway URL]"
-echo "   OAuth Token: [Your actual OAuth token]"
 echo ""
