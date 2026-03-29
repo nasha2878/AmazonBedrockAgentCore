@@ -1,0 +1,7 @@
+*** Create Project Directory ***
+mkdir -p ~/btagent
+cd ~/btagent
+
+*** Agent deploy commands ***
+chmod +x deploy.sh
+./deploy.sh

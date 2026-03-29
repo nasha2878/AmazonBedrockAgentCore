@@ -1,0 +1,72 @@
+ {
+    "input": {
+      "text": "Hello"
+    }
+  }
+
+{
+  "input": {
+    "text": "What new camping gear have our competitors like Patagonia and The North Face launched in the last 30 days?"
+  }
+}
+
+{
+  "input": {
+    "text": "Summarize the latest pricing strategies of Patagonia and Columbia for outdoor apparel."
+  }
+}
+
+{
+  "input": {
+    "text": "What are the emerging trends in hiking footwear and camping equipment this quarter?"
+  }
+}
+
+{
+  "input": {
+    "text": "Identify potential collaborations in the smart outdoor gear segment relevant to REI."
+  }
+}
+
+{
+  "input": {
+    "text": "Are there any recent safety or regulatory updates affecting outdoor retail in North America?"
+  }
+}
+
+
+Other Sample Prompts :
+
+Competitor Product Launches
+"Which new hiking backpacks did Patagonia and The North Face release in the last month?"
+"List any new outdoor apparel products launched by Columbia in the past 60 days."
+"What innovative camping gear is being introduced by REI’s competitors this quarter?"
+
+Pricing & Promotions
+"Compare pricing changes for REI vs Patagonia and Columbia for summer outdoor gear."
+"What discounts or promotional campaigns are currently active for The North Face outdoor jackets?"
+"Summarize recent price adjustments by REI competitors in North America and Europe."
+
+Market Trends & Consumer Insights
+"What are the trending materials and technologies in outdoor gear this season?"
+"Which outdoor sports or activities are seeing increased consumer demand globally?"
+"Identify trends in eco-friendly outdoor products among REI competitors."
+
+Partnership & Collaboration Opportunities
+"Which emerging startups could REI partner with in smart outdoor wearables?"
+"Identify potential collaborations for REI in adventure tourism equipment."
+"Which technology providers are competitors working with to enhance customer experience?"
+
+Regulatory, Safety & Risk Monitoring
+"Are there new safety regulations affecting climbing gear or camping equipment in North America?"
+"Summarize recent recalls or safety alerts issued for outdoor products by competitors."
+"Any emerging legal or trade risks impacting REI’s outdoor retail supply chain?"
+
+Geography-Specific Insights
+"What outdoor product trends are emerging in the Asia-Pacific market?"
+"Which competitor activities in Europe could impact REI’s market share?"
+"Identify key competitor launches in the US online outdoor retail space in the last month."
+
+Promotional Intelligence
+"Track social media buzz for Patagonia, The North Face, and Columbia over the past week."
+"Which competitors have launched new loyalty programs or marketing campaigns recently?"
