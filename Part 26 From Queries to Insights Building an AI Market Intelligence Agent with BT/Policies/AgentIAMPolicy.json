@@ -40,7 +40,7 @@
             "Action": [
                 "bedrock-agentcore:StartBrowserSession",
                 "bedrock-agentcore:StopBrowserSession",
-                "bedrock-agentcore:StopBrowserSession",
+                "bedrock-agentcore:GetBrowserSession",
 				"bedrock-agentcore:UpdateBrowserStream"
             ],
             "Resource": "*"
