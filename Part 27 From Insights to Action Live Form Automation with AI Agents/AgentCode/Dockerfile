@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY app.py .
 
-# ADD THIS: Copy your static folder containing demoform.html
+# ADD THIS: Copy your static folder containing Employee.html
 COPY static/ /app/static/
 
 # Create non-root user for security
