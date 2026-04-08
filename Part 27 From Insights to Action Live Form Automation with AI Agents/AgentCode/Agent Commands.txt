@@ -1,0 +1,7 @@
+*** Create Project Directory ***
+mkdir -p ~/ebaagent
+cd ~/ebaagent
+
+*** Agent deploy commands ***
+chmod +x deploy.sh
+./deploy.sh

@@ -1,0 +1,23 @@
+ {
+    "input": {
+      "text": "Hello, How are you? What is your name?"
+    }
+  }
+
+   {
+    "input": {
+      "text": "What is the capital of Uganda"
+    }
+  }
+
+{
+  "input": {
+    "text": "Please submit the form at http://127.0.0.1:8080/static/Employee.html with the following values:\n{{First Name: Namrata\nLast Name: Shah\nEmail: namrata.shah@example.com}}"
+  }
+}
+
+{
+  "input": {
+    "text": "Please submit the form at http://127.0.0.1:8080/static/Employee.html with the following values:\n{{First Name: John\nLast Name: Smith\nEmail: john.smith@example.com}}"
+  }
+}
