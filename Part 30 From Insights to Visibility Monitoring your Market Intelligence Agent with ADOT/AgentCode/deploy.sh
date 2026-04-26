@@ -52,7 +52,3 @@ docker push ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO_NAME}:latest
 echo "Container pushed to ECR!"
 echo ""
 echo "🔧 Next step: Configure your AgentCore Runtime with:"
-echo "-------------------------------------------------"
-echo "Environment Variable: OTEL_SERVICE_NAME = REI-Market-Intel-Agent"
-echo "-------------------------------------------------"
-echo "🚀 Deployment Complete!"
