@@ -1,0 +1,1 @@
+Permit any user to call myWeatherTool when the input parameter city is Chicago.
