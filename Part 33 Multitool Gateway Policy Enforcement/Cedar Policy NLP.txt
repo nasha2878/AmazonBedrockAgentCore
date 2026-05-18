@@ -1,0 +1,23 @@
+1. Weather tool :
+Permit any user to call myWeatherTool when the input parameter city is Chicago.
+
+2. Slack tool :
+Option 1:
+Create a Cedar policy for AWS Bedrock AgentCore that:
+- Allows any principal to execute the Slack notification action "slacknotifier___chatPostMessage" 
+- On the specific gateway resource "arn:aws:bedrock-agentcore:us-east-1:258652252690:gateway/mygateway-d6wfljgylk"
+- Only when the message text contains the word "Chicago"
+- Use pattern matching to check if "Chicago" appears anywhere in the message content
+
+Option 2:
+Allow chatPostMessage only when the message contains Chicago
+
+3. LocationIQ :
+Option 1:
+I need a Cedar policy that restricts my LocationIQ geocoding service to only provide coordinates for Chicago. The policy should check the city parameter in the input and only allow the coordinate lookup action when the city is Chicago. My gateway ARN is "arn:aws:bedrock-agentcore:us-east-1:258652252690:gateway/mygateway-d6wfljgylk" and the action is "LocationCoordinates___forwardGeocode".
+
+Option 2:
+Allow LocationCoordinates forwardGeocode action on gateway arn:aws:bedrock-agentcore:us-east-1:258652252690:gateway/mygateway-d6wfljgylk only when the input city parameter contains Chicago
+
+Option 3:
+Allow forwardGeocode for Chicago only
