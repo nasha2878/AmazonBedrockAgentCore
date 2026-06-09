@@ -11,7 +11,7 @@
                 "ecr:BatchGetImage"
             ],
             "Resource": [
-                "arn:aws:ecr:us-east-1:258652252690:repository/sfoagent"
+                "<< ECR REPO ARN >>"
             ]
         },
 		{
@@ -22,7 +22,7 @@
 				"logs:PutLogEvents"
 			],
 			"Resource": [
-				"arn:aws:logs:us-east-1:258652252690:log-group:/aws/bedrock-agentcore/runtimes/*"
+				"arn:aws:logs:us-east-1:<<ACCOUNT ID>>:log-group:/aws/bedrock-agentcore/runtimes/*"
 			]
 		},
 		{
@@ -31,7 +31,7 @@
 				"logs:DescribeLogGroups"
 			],
 			"Resource": [
-				"arn:aws:logs:us-east-1:258652252690:log-group:*"
+				"arn:aws:logs:us-east-1:<<ACCOUNT ID>>:log-group:*"
 			]
 		},
 		{
@@ -41,7 +41,7 @@
 				"logs:PutLogEvents"
 			],
 			"Resource": [
-				"arn:aws:logs:us-east-1:258652252690:log-group:/aws/bedrock-agentcore/runtimes/*:log-stream:*"
+				"arn:aws:logs:us-east-1:<<ACCOUNT ID>>:log-group:/aws/bedrock-agentcore/runtimes/*:log-stream:*"
 			]
 		},
 		{
@@ -83,7 +83,7 @@
 				"bedrock-agentcore:GetWorkloadAccessTokenForUserId"
 			],
 			"Resource": [
-				"arn:aws:bedrock-agentcore:us-east-1:258652252690:workload-identity-directory/default"
+				"arn:aws:bedrock-agentcore:us-east-1:<<ACCOUNT ID>>:workload-identity-directory/default"
 			]
 		},
 		{
@@ -95,7 +95,7 @@
 			],
 			"Resource": [
 				"arn:aws:bedrock:*::foundation-model/*",
-				"arn:aws:bedrock:us-east-1:258652252690:*"
+				"arn:aws:bedrock:us-east-1:<<ACCOUNT ID>>:*"
 			]
 		},
 		{
@@ -108,7 +108,7 @@
 		{
 			"Effect": "Allow",
 			"Action": "secretsmanager:GetSecretValue",
-			"Resource": "arn:aws:secretsmanager:us-east-1:258652252690:secret:mySFOASecret*"
+			"Resource": "<<SECRET ARN>>*"
 		},
 		{
 			"Effect": "Allow",
@@ -128,8 +128,8 @@
 				"logs:DescribeLogGroups"
 			],
 			"Resource": [
-				"arn:aws:logs:us-east-1:258652252690:log-group:aws/spans",
-				"arn:aws:logs:us-east-1:258652252690:log-group:aws/spans:*"
+				"arn:aws:logs:us-east-1:<<ACCOUNT ID>>:log-group:aws/spans",
+				"arn:aws:logs:us-east-1:<<ACCOUNT ID>>:log-group:aws/spans:*"
 			]
 		},
 		{
@@ -140,8 +140,8 @@
 				"logs:PutIndexPolicy"
 			],
 			"Resource": [
-				"arn:aws:logs:us-east-1:258652252690:log-group:aws/spans",
-				"arn:aws:logs:us-east-1:258652252690:log-group:aws/spans:*"
+				"arn:aws:logs:us-east-1:<<ACCOUNT ID>>:log-group:aws/spans",
+				"arn:aws:logs:us-east-1:<<ACCOUNT ID>>:log-group:aws/spans:*"
 			]
 		},
 		{
@@ -153,7 +153,7 @@
 				"logs:PutLogEvents"
 			],
 			"Resource": [
-				"arn:aws:logs:us-east-1:258652252690:log-group:/aws/bedrock-agentcore/evaluations/*"
+				"arn:aws:logs:us-east-1:<<ACCOUNT ID>>:log-group:/aws/bedrock-agentcore/evaluations/*"
 			]
 		}
 	]
