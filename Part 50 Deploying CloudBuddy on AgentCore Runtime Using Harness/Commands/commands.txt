@@ -1,0 +1,42 @@
+Step 1:
+
+#### Run Setup ####
+    chmod +x setup.sh 
+    ./setup
+
+#### Verify IAM role attachment ####
+    aws sts get-caller-identity
+
+
+Step 2:
+
+#### Change Directory ####
+    cd ~/cloudbuddy-agent
+
+#### Project Generation ####
+    agentcore create
+
+Step 3:
+
+#### Move into the automatically generated directory using ####
+    cd ~/cloudbuddy-agent/mycbuddy
+
+#### Open and adjust your regional environment targets map using ####
+    nano agentcore/aws-targets.json 
+
+#### Open the agent definition file located in the application directory ####
+	nano app/mycbuddy/harness.json
+
+
+Step 4:
+
+#### Clear any local build database artifacts to ensure a clean sync run using ####
+	rm -rf .cli/rm -rf cdk.out/rm -f agentcore/.agentcore
+
+#### Execute the native deployment command directly from the project directory using ####
+	agentcore deploy
+
+
+Step 5:
+#### Test Agent ####
+    agentcore invoke --prompt “Explain the difference between vertical scaling and horizontal scaling in one sentence.”

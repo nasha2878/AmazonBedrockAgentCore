@@ -1,0 +1,63 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BedrockModelInference",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Resource": "arn:aws:bedrock:*:*:foundation-model/anthropic.claude-3-5-sonnet*"
+    },
+    {
+      "Sid": "AgentCoreManagementAndRuntime",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock-agentcore:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CloudFormationAndCDKDeployment",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:CreateStack",
+        "cloudformation:DeleteStack",
+        "cloudformation:DescribeStacks",
+        "cloudformation:UpdateStack",
+        "cloudformation:GetTemplate",
+        "ssm:GetParameter"
+      ],
+      "Resource": "*"
+    },
+    {
+  "Sid": "SecureIAMRoleOrchestration",
+  "Effect": "Allow",
+  "Action": [
+    "iam:CreateRole",
+    "iam:DeleteRole",
+    "iam:GetRole",
+    "iam:AttachRolePolicy",
+    "iam:DetachRolePolicy",
+    "iam:PutRolePolicy",
+    "iam:DeleteRolePolicy"
+  ],
+  "Resource": [
+    "arn:aws:iam::*:role/cdk-*",
+    "arn:aws:iam::*:role/CloudBuddy*"
+  ]
+},
+{
+  "Sid": "SecurePassRoleToAgentCore",
+  "Effect": "Allow",
+  "Action": "iam:PassRole",
+  "Resource": "*",
+  "Condition": {
+    "StringEquals": {
+      "iam:PassedToService": "://amazonaws.com"
+    }
+  }
+}
+  ]
+}
