@@ -1,0 +1,81 @@
+Step 1:
+
+#### Run Setup ####
+    chmod +x setup.sh 
+    ./setup
+
+#### Verify IAM role attachment ####
+    aws sts get-caller-identity
+
+
+Step 2:
+
+#### Change Directory ####
+    cd ~/AIOpsAgent
+
+#### Project Generation ####
+    agentcore create
+
+Step 3:
+
+#### Move into the automatically generated directory using ####
+    cd ~/AIOpsAgent/myAIOpsAgent
+
+#### Open and adjust your regional environment targets map using ####
+    nano agentcore/aws-targets.json 
+
+#### Open the agent definition file located in the application directory ####
+	nano app/myAIOpsAgent/harness.json
+
+
+Step 4:
+
+#### Clear any local build database artifacts to ensure a clean sync run using ####
+	rm -rf .cli/rm -rf cdk.out/rm -f agentcore/.agentcore
+
+#### Execute the native deployment command directly from the project directory using ####
+	agentcore deploy
+
+
+Step 5:
+
+#### Test Agent ####
+
+Code Interpreter — shows sandboxed Python execution:
+    agentcore invoke --prompt "Generate a Fibonacci sequence up to 100 and plot it as a bar chart"
+    agentcore invoke --prompt "Calculate the standard deviation of [4, 8, 15, 16, 23, 42]"
+
+
+Browser — shows web automation:
+    agentcore invoke --prompt "Go to https://aws.amazon.com and tell me the main headline on the page"
+    agentcore invoke --prompt "Search for the current AWS re:Invent date on the web and summarize what you find"
+
+Scenario A — Real-Time Weather Retrieval (Browser)
+    agentcore invoke --prompt "What is the current weather in Seattle, WA? Include temperature, conditions, and wind speed."
+
+    What to observe: The agent autonomously launches the browser, navigates to a live weather source, extracts the relevant data, and returns a structured response — no API key, no SDK.
+
+Scenario B — Operational Data Analysis (Code Interpreter)
+    agentcore invoke --prompt "I have server response times in milliseconds: [120, 340, 89, 560, 210, 430, 95, 780, 150, 320]. Calculate the mean, median, p95, and flag any values above 500ms as incidents."
+
+    What to observe: The agent writes and executes Python live, returns computed statistics, and identifies incidents — no local Python environment needed.
+
+Scenario C — Multi-Step Ops Dispatch (Both Tools)
+    agentcore invoke --prompt "Check the current weather in Chicago. Then write a Python script that takes the temperature in Fahrenheit and converts it to Celsius, and calculates whether our field crews need cold-weather gear (below 5°C threshold). Output a dispatch recommendation."
+
+    What to observe: The agent:
+    Uses Browser to fetch live weather data
+    Uses Code Interpreter to run the conversion and threshold logic
+    Synthesizes both results into an actionable ops recommendation
+
+Scenario D — Observe the Agent Loop
+    agentcore invoke --prompt "Check the current weather in New York and calculate the heat index if humidity is 65%." --verbose
+
+    What to observe:
+    The --verbose flag exposes the full agent reasoning trace — which tool was selected, what input was passed, and what the tool returned, making the orchestration transparent.
+
+Step 6:
+
+#### Remove All Resources ####
+
+agentcore remove all

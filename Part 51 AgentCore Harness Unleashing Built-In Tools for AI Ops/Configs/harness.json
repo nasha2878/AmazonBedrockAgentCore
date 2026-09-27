@@ -1,0 +1,21 @@
+{
+  "name": "myOpsSyncAgent",
+  "model": {
+    "provider": "bedrock",
+    "modelId": "us.anthropic.claude-sonnet-4-6"
+  },
+  "tools": [
+    {
+      "type": "agentcore_browser",
+      "name": "browser"
+    },
+    {
+      "type": "agentcore_code_interpreter",
+      "name": "codeInterpreter"
+    }
+  ],
+  "skills": [],
+  "memory": {
+    "mode": "disabled"
+  }
+}
