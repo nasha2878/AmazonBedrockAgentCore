@@ -1,0 +1,88 @@
+Step 1:
+
+#### Run Setup ####
+    chmod +x setup.sh 
+    ./setup
+
+#### Verify IAM role attachment ####
+    aws sts get-caller-identity
+
+
+Step 2:
+
+#### Change Directory ####
+    cd ~/MemOpsAgent
+
+#### Project Generation ####
+    agentcore create
+
+Step 3:
+
+#### Move into the automatically generated directory using ####
+    cd ~/MemOpsAgent/myMemOpsAgentProj
+
+#### Open and adjust your regional environment targets map using ####
+    nano agentcore/aws-targets.json 
+
+#### Open the agent definition file located in the application directory ####
+	nano app/myMemOpsAgentHar/harness.json
+
+
+Step 4:
+
+#### Clear any local build database artifacts to ensure a clean sync run using ####
+	rm -rf .cli/rm -rf cdk.out/rm -f agentcore/.agentcore
+
+#### Execute the native deployment command directly from the project directory using ####
+	agentcore deploy
+
+
+Step 5:
+
+#### Test Agent ####
+
+Code Interpreter — shows sandboxed Python execution:
+    agentcore invoke --prompt "Generate a Fibonacci sequence up to 100 and plot it as a bar chart"
+    agentcore invoke --prompt "Calculate the standard deviation of [4, 8, 15, 16, 23, 42]"
+
+
+Browser — shows web automation:
+    agentcore invoke --prompt "Go to https://aws.amazon.com and tell me the main headline on the page"
+    agentcore invoke --prompt "Search for the current AWS re:Invent date on the web and summarize what you find"
+
+************************************** Scenario A — Short-Term Memory Validation *********************************
+Run these two prompts in sequence without resetting your session:
+   
+   agentcore invoke --prompt "My production cluster has 3 nodes. Each node handles 450 requests per second at peak load."
+   
+Wait for a 30 to 90 seconds for the short term memory to get updated
+
+   agentcore invoke --prompt "Based on what I just told you, what is the total peak request throughput across the entire cluster?"
+
+NOTE : IT MIGHT TAKE TIME TO REGISTER IN THE SHORT TERM MEMORY SO EXECUTE THE SECOND PROMPT AFTER 30 SECONDS. IF YOU STILL GET A VALID RESPONSE THEN WAIT AND REEXECUTE THE PROMPT.
+What to observe: The agent recalls the node count and per-node throughput from the first turn and uses it to answer the second question correctly, without you repeating the context. This confirms short-term memory is retaining up to 10 turns within the active session.
+
+
+************************************** Scenario B — Long-Term Memory Validation **************************************
+Run the first prompt, then close and reopen your terminal session, then run the second prompt:
+
+    First Prompt : agentcore invoke --prompt "Remember this for future sessions: our critical incident threshold is 500ms response time and our on-call team lead is Alex."
+
+Close your terminal, open a new session, then run: 
+
+    Second Prompt : agentcore invoke --prompt "What is our critical incident threshold and who is our on-call team lead?"
+
+What to observe: The agent retrieves the stored context from the previous session without being told again. This confirms long-term memory is persisting context across sessions within the 1 hour TTL window.
+
+Step 6:
+
+#### Remove All Resources ####
+
+agentcore remove all
+
+This single command tears down everything that was provisioned during deployment.
+
+Confirm Removal
+Once the command completes, confirm everything was torn down successfully:
+
+agentcore list
