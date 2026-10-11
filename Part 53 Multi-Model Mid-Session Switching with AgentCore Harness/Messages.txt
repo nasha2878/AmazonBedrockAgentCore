@@ -1,0 +1,28 @@
+Message 1
+
+Store this cluster data for analysis:
+- Cluster name: prod-ops-cluster
+- Nodes: 6, vCPUs per node: 16, RAM per node: 64GB
+- Current avg CPU utilization: 72%
+- Current avg RAM utilization: 58%
+- Current rps per node: 420, Node cost: $180/month
+Just acknowledge you have received and understood this data.
+
+Message 2
+
+Using the cluster data from this session:
+1. Total current rps capacity
+2. Usable rps capacity at 80% CPU ceiling
+3. Nodes needed to handle 3x current load at 80% CPU ceiling
+4. Additional nodes required beyond current 6
+5. Monthly cost of the additional nodes
+6. Total cluster cost after scaling
+
+Message 3
+
+Based on the cluster data and scaling calculations in this session:
+1. Cost per rps before scaling
+2. Cost per rps after scaling
+3. Cost efficiency delta
+4. Break-even point if traffic grows 10% per month
+5. Your recommendation — scale now or wait?
