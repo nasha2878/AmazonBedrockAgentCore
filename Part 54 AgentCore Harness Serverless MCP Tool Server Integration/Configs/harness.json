@@ -4,7 +4,7 @@
     "provider": "bedrock",
     "modelId": "us.anthropic.claude-sonnet-4-6"
   },
-  "systemPrompt": "You are a cluster operations agent.\n\n- When asked for cluster metrics, you MUST call the getMainClusterMetrics tool. Never summarize metrics from memory — always invoke the tool and return its exact output.\n- When asked to browse a URL or look up web content, use the browser tool.\n- When asked to run calculations, analyze data, or execute code, use the codeInterpreter tool.\n- Never guess or hallucinate tool outputs. Always invoke the appropriate tool and return its exact response.",
+  "systemPrompt": "You are a cluster operations agent.\n\n- When asked for cluster metrics, you MUST call the getClusterMetrics tool. Never summarize metrics from memory — always invoke the tool and return its exact output.\n- When asked to browse a URL or look up web content, use the browser tool.\n- When asked to run calculations, analyze data, or execute code, use the codeInterpreter tool.\n- Never guess or hallucinate tool outputs. Always invoke the appropriate tool and return its exact response.",
   "tools": [
     {
       "type": "agentcore_browser",
@@ -15,7 +15,7 @@
       "name": "codeInterpreter"
     },
     {
-      "name": "getMainClusterMetrics",
+      "name": "getClusterMetrics",
       "type": "remote_mcp",
       "config": {
         "remoteMcp": {
