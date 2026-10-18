@@ -1,0 +1,69 @@
+Step 1:
+
+#### Run Setup ####
+    chmod +x setup.sh 
+    ./setup
+
+#### Verify IAM role attachment ####
+    aws sts get-caller-identity
+
+
+Step 2:
+
+#### Change Directory ####
+    cd ~/MCPOpsAgent
+
+#### Project Generation ####
+    agentcore create
+
+Step 3:
+
+curl -X POST <<Lambda Public URL>> -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "method": "tools/list", "params": {}, "id": 1}'
+
+
+Step 4:
+
+#### Move into the automatically generated directory using ####
+    cd ~/MCPOpsAgent/myMCPOpsAgentProj/
+
+#### Open and adjust your regional environment targets map using ####
+    nano agentcore/aws-targets.json 
+
+#### Open the agent definition file located in the application directory ####
+	nano app/myMCPOpsAgentHar/harness.json
+
+
+Step 5:
+
+#### Clear any local build database artifacts to ensure a clean sync run using ####
+	rm -rf .cli/rm -rf cdk.out/rm -f agentcore/.agentcore
+
+#### Execute the native deployment command directly from the project directory using ####
+	agentcore deploy
+
+
+Step 6:
+#### Test Agent ####
+
+Code Interpreter — shows sandboxed Python execution:
+    agentcore invoke --prompt "Generate a Fibonacci sequence up to 100 and plot it as a bar chart"
+    agentcore invoke --prompt "Calculate the standard deviation of [4, 8, 15, 16, 23, 42]"
+
+
+Browser — shows web automation:
+    agentcore invoke --prompt "Go to https://aws.amazon.com and tell me the main headline on the page"
+    agentcore invoke --prompt "Search for the current AWS re:Invent date on the web and summarize what you find"
+
+
+Serverless MCP Tool
+agentcore invoke --prompt "Get live cluster metrics"
+
+
+Step 7:
+
+#### Remove All Resources ####
+This single command tears down everything that was provisioned during deployment:
+agentcore remove all  
+
+Confirm Removal. Once the command completes, confirm everything was torn down successfully:
+agentcore list
