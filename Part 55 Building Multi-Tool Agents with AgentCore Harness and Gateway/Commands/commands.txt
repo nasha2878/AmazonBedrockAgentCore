@@ -1,0 +1,51 @@
+******************* STEP 2 *******************
+
+Issuer : Issuer: https://cognito-idp.us-east-1.amazonaws.com/<<YOUR_USER_POOL_ID>>
+
+Authorization : https://<<YOUR-DOMAIN>>.auth.us-east-1.amazoncognito.com/oauth2/authorize
+
+Token : https://<<YOUR-DOMAIN>>.auth.us-east-1.amazoncognito.com/oauth2/token
+
+******************* STEP 3 *******************
+System Prompt to copy :
+
+You are a helpful assistant with access to multiple tools through a gateway.
+
+You have access to:
+- Weather tool: Get current weather information for any location
+- Lambda function: Execute custom business logic
+- Slack integration: Send messages and interact with Slack
+
+When users ask questions, determine which tool(s) can help and use them appropriately.
+Combine information from multiple tools when needed to provide comprehensive answers.
+Always be clear about what information came from which tool.
+
+
+******************* STEP 4 *******************
+
+Prompt: Is tomorrow a good day to go sea surfing in Santa Monica?
+Expected: Uses Weather tool only
+
+Prompt: What's the weather in Boston?
+Expected: Uses Weather tool only
+
+Prompt: Get weather for Seattle and post it to Slack on #social
+Expected: Uses Weather → Slack Tools
+
+Prompt: Get coordinates for Tokyo, check weather, and send to Slack
+Expected: Uses Lambda → Weather → Slack Tools
+
+Additional Prompts:
+Get weather for Mumbai and then Send I love you message to #social
+Send \"Execution beats intention.\" to #social channel on Slack
+Get the coordinates for Berlin and send them to #social
+What is the current weather in Tokyo? Send it to #social.
+Get the coordinates for Madrid, then get the weather for those coordinates, then send a short summary to #social
+Find coordinates for Toronto and also send them to #social and #all-nam
+Tell me a motivational quote and send it to #social
+Get coordinates for a city that does not exist and send result to #social
+Get the weather the bean city and share it on #social and #all-nam
+
+Get the coordinates for Madrid, then get the weather for those coordinates, then send a short summary to #social and #all-nam
+
+
