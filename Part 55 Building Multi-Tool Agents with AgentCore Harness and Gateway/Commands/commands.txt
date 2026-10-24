@@ -1,6 +1,6 @@
 ******************* STEP 2 *******************
 
-Issuer : Issuer: https://cognito-idp.us-east-1.amazonaws.com/<<YOUR_USER_POOL_ID>>
+Issuer : https://cognito-idp.us-east-1.amazonaws.com/<<YOUR_USER_POOL_ID>>
 
 Authorization : https://<<YOUR-DOMAIN>>.auth.us-east-1.amazoncognito.com/oauth2/authorize
 
