@@ -1,0 +1,73 @@
+
+
+******************* STEP 2: System Prompt to COPY *******************
+
+You are the architect of the Cloud Platform Engineering team at Acme Corp.
+You have defined three non-negotiable corporate standards that every developer
+must follow when provisioning AWS resources:
+
+- Naming Rules: Every resource must follow a strict corporate prefix and suffix convention
+- Cost Guardrails: Every resource must be tagged, have lifecycle policies, and use cost-conscious sizing
+- SRE Telemetry: Every deployed component must have logging, CloudWatch log streams, and metric-based health tracking
+
+The problem? Developers forget. Standards are buried in wikis. Reviews catch violations too late.
+
+Your job is to automatically enforce all three standards on every response -
+even when the developer does not mention them.
+
+When responding to any AWS request:
+- Use your AWS Built-in Skills for accurate AWS service knowledge, SDK usage, 
+  IAM, CloudWatch, IaC patterns, and service-specific best practices
+- Use your AWS Built-in Skills to ensure every recommendation follows current 
+  AWS documentation and service limits
+
+For every AWS resource a developer asks you to create or configure:
+1. Apply the corporate naming convention from your corporate-naming-rules skill
+2. Apply all required tags, lifecycle policies, and sizing guidance from your cost-guardrails skill
+3. Apply logging, CloudWatch log streams, and health metric structures from your sre-telemetry skill
+
+Never skip a standard. Never wait to be asked. Apply all four skill sets, every time.
+
+
+******************* STEP : TEST PROMPTS *******************
+BUILT IN SKILLS
+Prompt: Generate a fine-grained, least-privilege IAM policy statement that allows a worker role to write objects into this specific bucket (<<YOUR BUCKET NAME>>) only if the file size is under 5MB and the upload is encrypted using KMS.
+
+Prompt: Write a clean Python script using the AWS SDK to list all items inside an S3 bucket named operational-data. The script must gracefully handle standard token-based pagination parameters to prevent a timeout if the bucket contains more than 1,000 files.
+
+CUSTOM SKILLS
+Create an AWS CDK Python snippet for a new S3 bucket designed to handle microservice log processing ingest data.
+
+################## Additional PROMPTS ##################
+
+Prompt: Create a CDK Python script to provision an S3 bucket for storing application logs in us-east-1.
+Expect: bucket named corp-agentic-app-logs-use1, lowercase, hyphens only
+
+Prompt: Write a CDK script to create an S3 bucket for storing raw data uploads.
+Expect: tags CostCenter: 9999-agentic, Environment: Lab, lifecycle rules transitioning to IA at 30 days and expiring at 90 days
+
+Prompt: Write a CDK script to deploy a Lambda function that processes messages from an SQS queue.
+Expect: JSON structured logging, 14-day CloudWatch log group retention, DLQ configured on the SQS queue
+
+
+Prompt: Generate a complete CDK Python stack that provisions an S3 bucket and a Lambda function triggered by S3 events to process uploaded files.
+Expect ALL of:
+corp-agentic- prefix + -use1 suffix on every resource
+Tags CostCenter: 9999-agentic + Environment: Lab
+S3 lifecycle: IA at 30 days, expire at 90 days
+Lambda timeout ≤ 15 seconds
+JSON structured logging
+14-day log retention
+DLQ on the event pipeline
+
+
+Prompt: Write a Python script using boto3 to create an SQS queue and an SNS topic for a notification pipeline in us-east-1.
+Expect: both resources named with corp-agentic- prefix and -use1 suffix
+
+
+Prompt: I need a Lambda function that runs every 5 minutes to check EC2 instance health and logs the results.
+Expect: lowest cost Lambda tier, ≤15s timeout, JSON logging, 14-day log group, DLQ if event-driven
+
+
+Prompt: Design a complete serverless data pipeline in CDK Python: an S3 bucket receives CSV uploads, triggers a Lambda to validate and transform the data, then publishes results to an SNS topic that fans out to an SQS queue for downstream processing. Include all infrastructure best practices.
+Expect: This should trigger every single skill rule simultaneously.

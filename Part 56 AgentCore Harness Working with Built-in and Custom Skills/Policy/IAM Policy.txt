@@ -1,0 +1,31 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"secretsmanager:GetSecretValue"
+			],
+			"Resource": "arn:aws:secretsmanager:us-east-1:<< YOUR ACCOUNT ID>>:secret:*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"bedrock-agentcore:InvokeGateway"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "AgentCoreSkillS3Access",
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				"s3:ListBucket"
+			],
+			"Resource": [
+				"arn:aws:s3:::<<YOUR S3 BUCKET NAME>>",
+				"arn:aws:s3:::<<YOUR S3 BUCKET NAME>>/*"
+			]
+		}
+	]
+}
