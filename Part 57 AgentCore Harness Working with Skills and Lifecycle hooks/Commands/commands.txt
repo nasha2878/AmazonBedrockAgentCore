@@ -29,7 +29,7 @@ For every AWS resource a developer asks you to create or configure:
 Never skip a standard. Never wait to be asked. Apply all four skill sets, every time.
 
 
-******************* STEP : TEST PROMPTS *******************
+******************* STEP 6: TEST PROMPTS *******************
 Create a script to provision an SQS queue and an SNS topic for a notification pipeline in us-east-1. Write the script only. Do not provision any resources.
 
 Create a Python script to provision an S3 bucket and a Lambda function in us-east-1. Write the script only. Do not provision any resources.
