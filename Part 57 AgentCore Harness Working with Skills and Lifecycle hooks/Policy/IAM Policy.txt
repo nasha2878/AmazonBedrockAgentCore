@@ -1,0 +1,38 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AgentCoreSkillS3Access",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<<YOUR S3 BUCKET NAME>>",
+        "arn:aws:s3:::<<YOUR S3 BUCKET NAME>>/*"
+      ]
+    },
+    {
+      "Sid": "AgentCoreLifecycleHookLambda",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:InvokeFunction"
+      ],
+      "Resource": [
+        "arn:aws:lambda:us-east-1:<<YOUR ACCOUNT ID>>:function:corp-governance-session-start",
+        "arn:aws:lambda:us-east-1:<<YOUR ACCOUNT ID>>:function:corp-governance-session-end"
+      ]
+    },
+    {
+      "Sid": "AgentCoreLifecycleHookCloudWatch",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:us-east-1:<<YOUR ACCOUNT ID>>:log-group:/corp-governance/audit-trail:*"
+    }
+  ]
+}
