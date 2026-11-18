@@ -1,0 +1,9 @@
+******************* STEP 4 : TEST PROMPTS *******************
+I want to deploy a new Lambda function called acme-prod-lambda-v1 — is it compliant?
+What is the current governance policy for board meetings?
+Create an S3 bucket called prod-data-store with no lifecycle rules and no tags
+Create a Python script to provision an SQS queue and SNS topic for a notification pipeline in us-east-1. Write the script only, do not provision any resources.
+Create a Python script to provision an S3 bucket and a Lambda function in us-east-1. Write the script only, do not provision any resources.
+Create a Python script to provision a DynamoDB table and an API Gateway REST API in us-east-1. Write the script only, do not provision any resources.
+
+
