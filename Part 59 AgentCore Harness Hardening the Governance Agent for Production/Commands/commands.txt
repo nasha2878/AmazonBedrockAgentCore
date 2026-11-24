@@ -1,0 +1,74 @@
+######################################### STEP 2 : UPDATE HARNESS CONFIGURATION #########################################
+
+1. Navigate to Invocation Limits and set:
+Max iterations: 10 - The Governance Agent reviews policies and checks compliance. It should never need more than 10 loops to complete a review. This prevents a runaway agent burning compute and cost.
+Max tokens: 8000 - Enough for a thorough governance review without letting the agent generate unbounded output.
+Timeout duration : 300 seconds - If a developer walks away mid-session, the agent terminates cleanly rather than sitting idle consuming resources.
+
+2. Navigate to Model and system prompt and add parameters:
+Temperature: 0.0 - Governance decisions must be consistent and deterministic. You do not want the agent giving different compliance verdicts for the same policy on different days.
+TopP: 0.9 - Keeps the model focused without being completely rigid.
+Max tokens: 8000 - Enough for a thorough governance review without letting the agent generate unbounded output.
+
+3. Navigate to Truncation and set:
+Truncation Strategy: Summarization
+Summary Ration: 0.3
+Preserve Recent Messages: 10
+Summarization Prompt : You are summarizing a governance audit conversation. Compress aggressively but retain: the original user request in one sentence, a count of resources reviewed so far (e.g. "12 of 50 buckets reviewed"), which governance standards were applied, a brief list of violation categories found (not every instance), and whether any remediations were recommended. Do not retain full resource names or per-resource details. The agent will re-examine specific resources when needed.
+
+4. Navigate to Allowed Tools and set:
+Add glob pattern: corp-governance-* - Only governance tools can run, nothing else
+
+######################################### STEP 3 : TEST THE AGENT #########################################
+To execute each test. Make the required changes and redeploy. Different models can give different outputs.
+
+
+****************** Test 1 - Max Iterations ******************
+
+Action: Set max iterations to 2 and redeploy.
+
+Prompt: Evaluate corp-agentic-raw-us-east-1 strictly one tool call per turn: (1) run the naming skill, (2) only if Step 1 passes, run the tagging skill, (3) only if Step 2 passes, run the lifecycle skill, and (4) output a one-line status after each tool result before calling the next.
+
+What to watch for: Only 2 tool calls should be made. At the end a final response may not be returned.
+
+
+****************** Test 2 - Max Tokens ******************
+
+Action : Reset max iterations to 10. Set max tokens to 100. Also under Model and system prompt >> Parameters set max token to 100 and redeploy.
+
+Prompt: Write a detailed, 1,000-word enterprise governance audit report covering all 20 S3 buckets, including full CDK remediation templates, IAM policies, and compliance rationales for each bucket.
+
+What to watch for: The response will cut off mid-sentence right around ~75 words (100 tokens), and the Bedrock model invocation telemetry will show stopReason: max_tokens or Model stopped generating due to maximum token limit.
+
+
+****************** Test 3 - Determinism ******************
+
+Action : Reset max tokens to 8000 at both the places. Run this exact prompt three times in three separate sessions.
+
+Prompt: Is the bucket name "ACME_Prod_Logs_V2" compliant with Acme Corp naming conventions?
+
+What to watch for: Temperature 0.0 keeps responses deterministic across runs (minor GPU floating-point variance can occasionally occur even at 0.0).
+
+Tip : In case the responses are not consistent then change to a higher model like Nova Pro or Sonnet 4.6. For Anthropic models remove either Top P or temperature.
+
+****************** Test 4 - Summarization  ******************
+
+Prompt : Execute a continuous single-session audit across all 15 S3 buckets below; for each bucket in order, explicitly re-load the corporate-naming-rules, cost-guardrails, and sre-telemetry skills from scratch, repeat the full verbatim directive checklist, evaluate every rule in detail, output a verbose standalone AWS CDK Python stack with full IAM policy JSON and inline comments, and write a comprehensive 400-word architectural compliance rationale before advancing to the next bucket, then finish with a consolidated summary of all 15 buckets: corp-agentic-raw-us-east-1, acme-prod-data-bucket, MyTestBucket, corp-agentic-logs-us-east-1, dev_bucket_01, CORP-AGENTIC-ARCHIVE-USE1, corp-agentic-metrics-us-east-1, prod-data-lake-v2, corp_agentic_backup_use1, corp-agentic-events-us-east-1, testbucket123, corp-agentic-staging-us-east-1, acme-dev-bucket, test_bucket_99, PROD-BUCKET-V3.
+
+What to watch for: As the audit progresses past 10 internal turns and fills the context window, the harness triggers the Summarization truncation strategy without throwing a context-length overflow error. CloudWatch logs show the conversation manager compressing older messages using your custom summarization prompt (retaining the count of reviewed buckets, standards applied, and violation categories while dropping earlier per-bucket details), and the final consolidated summary accurately reports all 15 buckets reviewed.
+
+Tip1 : In case the response only evaluates 1 bucket or stops after 3 buckets then change to a higher model like Nova Pro or Sonnet 4.6. For Anthropric models remove either Top P or temperature.
+Tip2 : If you get the max token limit then increase the number of tokens to 9000 or more.
+
+****************** Test 5 - Allowed Tools ******************
+
+Prompt1 : What is the current EC2 instance pricing for m5.xlarge in us-east-1?
+
+What to watch for: Either no response or the agent refuses. No tool outside corp-governance-* fires. CloudWatch confirms nothing leaked.
+
+Prompt2 : Review the naming convention for S3 bucket: ACME_Prod_Logs_V2
+
+What to watch for: The agent calls a corp-governance-* tool and returns a compliance verdict. CloudWatch confirms the tool call was within the allowed pattern.
+
+Tip1 : If you use Anthropic models like Sonnet 4.6, it does not treat skills as tools and may attempt to call built-in AWS tools instead, causing this test to fail.
+Tip2 : Suggested model Nova Pro.
